@@ -2,7 +2,8 @@ import java.io.*;
 
 public class Serialization {
 
-    public static String serialize(Hotel data, String fileName){
+
+    public static void serialize(Hotel data, String fileName) {
         try {
             FileOutputStream fileOut = new FileOutputStream(fileName, false);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -14,22 +15,27 @@ public class Serialization {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return fileName;
     }
 
     public static Hotel deSerialize(String fileName) {
         Hotel f1 = null;
-        try{
-            FileInputStream filein = new FileInputStream(fileName);
-            ObjectInputStream in = new ObjectInputStream(filein);
+        try {
+            FileInputStream fileIn = new FileInputStream(fileName);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
             f1 = (Hotel) in.readObject();
             in.close();
-            filein.close();
+            fileIn.close();
         } catch (ClassNotFoundException | IOException e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
         return f1;
     }
 
-
+    public static void clearFile(String fileName) {
+        try {
+            new FileOutputStream(fileName).close();
+        } catch (IOException e) {
+            System.out.println("File not found");
+        }
+    }
 }

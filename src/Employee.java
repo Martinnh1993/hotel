@@ -6,7 +6,7 @@ public class Employee extends PersonalInfo implements Serializable {
     private String tittle;
     private double salary;
 
-    public Employee(String firstName, String lastName, int phoneNr, String title, double salary) {
+    public Employee(String firstName, String lastName, Long phoneNr, String title, double salary) {
         super(firstName,lastName,phoneNr);
         this.tittle = title;
         this.salary = salary;
@@ -26,11 +26,12 @@ public class Employee extends PersonalInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "Name: " + firstName + " "+ lastName;
-             /*   "\ntittle: " + tittle +
-                "\nphoneNr: " + phoneNr +
-                "\nsalary: " + salary;
-*/
+        return "Employee" +
+                "\nFirst name: " + firstName +
+                "\nLast name=: " + lastName +
+                "\nPhone number: " + phoneNr +
+                "\nTittle: " + tittle +
+                "\nSalary: " + salary;
     }
 }
 
