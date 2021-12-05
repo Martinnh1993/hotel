@@ -71,15 +71,13 @@ public class Guest extends PersonalInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "Guest" +
-                "\nFirst name: " + firstName +
-                "\nLast name: " + lastName +
+        return  "Name: " + firstName + " " + lastName +
+                "\nAddress: " + address + " " + zipCode +
                 "\nPhone number: " + phoneNr +
-                "\nAddress: " + address +
-                "\nZip code: " + zipCode +
-                "\nNumber of guests in the room: " + numberOfGuests +
-                "\nStart date: " + startDate +
-                "\nEnd date: " + endDate +
-                "\nNights: " + daysBetween();
+                "\n " + numberOfGuests + " people, " +
+                "staying for " + daysBetween() + " nights" +
+                "\narriving the " + startDate +
+                " and leaving the " + endDate;
+
     }
 }

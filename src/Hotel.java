@@ -20,36 +20,49 @@ public class Hotel implements Serializable {
     public void addAllRooms(Room room) {allRooms.add(room);}
 
     public void printEmployees() {
-        System.out.println("Current employees are: ");
+        System.out.println(Menu.staffMenuHeader);
         for (int i = 0; i < staff.size(); i++) {
             System.out.println("Press [" + (i + 1) + "] to select: " + "Employee: " + staff.get(i).getFirstName() + " " + staff.get(i).getLastName() + " Phone nr:  " + staff.get(i).getPhoneNr()
                     + " Title: " + staff.get(i).getTitle() + " Salary: " + staff.get(i).getSalary() + "kr");
+            System.out.println(Menu.line);
         }
     }
 
     public void printAllRooms() {
-        System.out.println("Rooms are: ");
+        System.out.println(Menu.allRoomHeader);
         for (int i = 0; i < allRooms.size(); i++) {
             System.out.println("Press [" + (i + 1) + "] to select: " + "Floor: " + allRooms.get(i).getFloorNr() + " Room Number: " + allRooms.get(i).getRoomNr()
                     + " Type of room:  " + allRooms.get(i).getRoomKind() + " Price: " + allRooms.get(i).getPricePerNight() + "kr");
+            System.out.println(Menu.line);
         }
     }
 
     public  void printAvailableRooms() {
-        System.out.println("Current available Rooms are: ");
+        System.out.println(Menu.availableRoomHeader);
         for (int i = 0; i < availableRooms.size(); i++) {
             System.out.println("Press [" + (i + 1) + "] to select: " + "Floor: " + availableRooms.get(i).getFloorNr() + " Room Number: " + availableRooms.get(i).getRoomNr()
                     + " Type of room:  " + availableRooms.get(i).getRoomKind() + " Price: " + availableRooms.get(i).getPricePerNight() + "kr");
+            System.out.println(Menu.line);
         }
     }
 
     public void printBookedRooms() {
-
-        System.out.println("Current booked Rooms are: ");
+        System.out.println(Menu.bookedRoomHeader);
         for (int i = 0; i < bookedRooms.size(); i++) {
             System.out.println("Press [" + (i + 1) + "] to select: " + "Floor: " + bookedRooms.get(i).getFloorNr() + " Room Number: " + bookedRooms.get(i).getRoomNr()
                     + " Type of room:  " + bookedRooms.get(i).getRoomKind() + " Price: " + bookedRooms.get(i).getPricePerNight());
             System.out.println(bookedRooms.get(i).getGuestInRoom().toString());
+            System.out.println(Menu.line);
+        }
+    }
+
+    public void printCheckout() {
+        System.out.println(Menu.checkoutHeader);
+        for (int i = 0; i < bookedRooms.size(); i++) {
+            System.out.println("Press [" + (i + 1) + "] to select: " + "Floor: " + bookedRooms.get(i).getFloorNr() + " Room Number: " + bookedRooms.get(i).getRoomNr()
+                    + " Type of room:  " + bookedRooms.get(i).getRoomKind() + " Price: " + bookedRooms.get(i).getPricePerNight());
+            System.out.println(bookedRooms.get(i).getGuestInRoom().toString());
+            System.out.println(Menu.line);
         }
     }
 
@@ -67,7 +80,7 @@ public class Hotel implements Serializable {
 
             do {
                 printAvailableRooms();
-                System.out.println("Press [0] to go back to main");
+                System.out.println(Menu.back);
                 tempString = inputString.next();
                 tempInt = PersonalInfo.convertString(tempString);
                 roomChoice = tempInt - 1;
@@ -188,7 +201,7 @@ public class Hotel implements Serializable {
         do {
             System.out.println("What room would you like?");
             printBookedRooms();
-            System.out.println("Press [0] to go back to main");
+            System.out.println(Menu.back);
             tempString = inputString.next();
             tempInt = PersonalInfo.convertString(tempString);
 
@@ -197,7 +210,6 @@ public class Hotel implements Serializable {
             roomChoice = tempInt - 1;
             foundRoom = bookedRooms.get(roomChoice);
             do {
-                System.out.println("Press [0] to go back to main");
                 System.out.println("Press [1] to change first name");
                 System.out.println("Press [2] to change last name");
                 System.out.println("Press [3] to change phone number");
@@ -206,6 +218,7 @@ public class Hotel implements Serializable {
                 System.out.println("Press [6] to change wifi");
                 System.out.println("press [7] to change number of guests");
                 System.out.println("Press [8] to change end date");
+                System.out.println(Menu.back);
 
                 int choice = inputString.nextInt();
 
@@ -335,9 +348,9 @@ public class Hotel implements Serializable {
 
 
         do {
-            System.out.println("What room would you like?");
-            printBookedRooms();
-            System.out.println("Press [0] to go back to main");
+            System.out.println("Current occupied rooms are");
+            printCheckout();
+            System.out.println(Menu.back);
 
             tempString = inputString.next();
             tempInt = PersonalInfo.convertString(tempString);
@@ -408,7 +421,7 @@ public class Hotel implements Serializable {
         do {
             System.out.println("Choose employee");
             printEmployees();
-            System.out.println("Press [0] to go back to main");
+            System.out.println(Menu.back);
             tempString = inputString.next();
             tempInt = PersonalInfo.convertString(tempString);
 
@@ -422,7 +435,7 @@ public class Hotel implements Serializable {
                 System.out.println("Press [3] to change phone number");
                 System.out.println("Press [4] to change title");
                 System.out.println("press [5] to change salary");
-                System.out.println("Press [0] to go back to main");
+                System.out.println(Menu.back);
 
                 int choice = inputString.nextInt();
 
@@ -502,9 +515,12 @@ public class Hotel implements Serializable {
             System.out.println("Press [0] to go back to main");
             tempString = inputString.next();
             roomChoice = PersonalInfo.convertString(tempString);
-            valid = roomChoice >= 0 && roomChoice <= 6;
-
-        } while (valid);
+            if (roomChoice >= 0 && roomChoice <=6) {
+                valid = true;
+            } else {
+                valid = false;
+            }
+        } while (valid == false);
 
             switch (roomChoice) {
                 case '1', '2', '3', '4', '5', '6':
@@ -529,6 +545,7 @@ public class Hotel implements Serializable {
     }
 
     public void revenueStream () {
+        System.out.println(Menu.revenueHeader);
         System.out.println("Revenue:");
         System.out.println("Amount of guests: " + guests);
         System.out.println("Income: " + revenue + "kr");

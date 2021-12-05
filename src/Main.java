@@ -49,7 +49,7 @@ public class Main {
                 plaza = Serialization.deSerialize("Database.ser");
             }
 
-
+            System.out.println(Menu.hotelPlaza);
             boolean quit=false;
             do {
                 Menu.displayMenu();
