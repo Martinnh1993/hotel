@@ -79,8 +79,13 @@ public class Main {
             boolean quit=false;
             do {
                 Menu.displayMenu();
-
-                int choice = inputString.nextInt();
+                int choice;
+                String temp = inputString.next();
+                try {
+                    choice = Integer.parseInt(temp);
+                } catch (NumberFormatException e) {
+                    choice = 7;
+                }
 
                 switch (choice) {
                     case -1 -> {
