@@ -69,6 +69,10 @@ public class Guest extends PersonalInfo implements Serializable {
         return diff;
     }
 
+    public int month () {
+        return endDate.getMonthValue();
+    }
+
     @Override
     public String toString() {
         return  "Name: " + firstName + " " + lastName +

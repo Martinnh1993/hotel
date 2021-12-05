@@ -11,13 +11,13 @@ public class Hotel implements Serializable {
     private final ArrayList<Room> allRooms = new ArrayList<>();
     private final ArrayList<Room> bookedRooms = new ArrayList<>();
     private final ArrayList<Employee> staff = new ArrayList<>();
-    private double revenue;
-    private int guests;
+    private final ArrayList<Revenue> revenues = new ArrayList<>();
 
     public void addEmployee(Employee employee) {staff.add(employee);}
     public void addBookedRoom(Room room) {bookedRooms.add(room);}
     public void addAvailableRoom(Room room) {availableRooms.add(room);}
     public void addAllRooms(Room room) {allRooms.add(room);}
+    public void addRevenue (Revenue revenue) {revenues.add(revenue);}
 
     public void printEmployees() {
         System.out.println(Menu.staffMenuHeader);
@@ -62,6 +62,14 @@ public class Hotel implements Serializable {
             System.out.println("Press [" + (i + 1) + "] to select: " + "Floor: " + bookedRooms.get(i).getFloorNr() + " Room Number: " + bookedRooms.get(i).getRoomNr()
                     + " Type of room:  " + bookedRooms.get(i).getRoomKind() + " Price: " + bookedRooms.get(i).getPricePerNight());
             System.out.println(bookedRooms.get(i).getGuestInRoom().toString());
+            System.out.println(Menu.line);
+        }
+    }
+
+    public void printRevenue() {
+        System.out.println(Menu.revenueHeader);
+        for (int i = 0; i < revenues.size(); i++) {
+            System.out.println(revenues.get(i));
             System.out.println(Menu.line);
         }
     }
@@ -379,8 +387,14 @@ public class Hotel implements Serializable {
                 tempString = inputString.next();
                 if (tempString.equalsIgnoreCase("y")) {
                     System.out.println("Transaction complete");
-                    revenue += total;
-                    guests += foundRoom.getGuestInRoom().getNumberOfGuests();
+                    for (int i = 1; i <= 12; i++) {
+                        if (foundRoom.getGuestInRoom().month()== i) {
+                            double tempRevenue = revenues.get(i-1).getRevenue();
+                            int tempGuests = revenues.get(i-1).getGuests();
+                            revenues.get(i-1).setRevenue(tempRevenue += total);
+                            revenues.get(i-1).setGuests(tempGuests += foundRoom.getGuestInRoom().getNumberOfGuests());
+                        }
+                    }
                     foundRoom.setGuestInRoom(null);
                     foundRoom.setWifiAccess(false);
                     bookedRooms.remove(foundRoom);
@@ -395,8 +409,14 @@ public class Hotel implements Serializable {
                 tempString = inputString.next();
                 if (tempString.equalsIgnoreCase("y")) {
                     System.out.println("Transaction complete");
-                    revenue += total;
-                    guests += foundRoom.getGuestInRoom().getNumberOfGuests();
+                    for (int i = 1; i <= 12; i++) {
+                        if (foundRoom.getGuestInRoom().month()== i) {
+                            double tempRevenue = revenues.get(i-1).getRevenue();
+                            int tempGuests = revenues.get(i-1).getGuests();
+                            revenues.get(i-1).setRevenue(tempRevenue += total);
+                            revenues.get(i-1).setGuests(tempGuests += foundRoom.getGuestInRoom().getNumberOfGuests());
+                        }
+                    }
                     foundRoom.setGuestInRoom(null);
                     foundRoom.setWifiAccess(false);
                     bookedRooms.remove(foundRoom);
@@ -544,10 +564,13 @@ public class Hotel implements Serializable {
 
     }
 
-    public void revenueStream () {
-        System.out.println(Menu.revenueHeader);
-        System.out.println("Revenue:");
-        System.out.println("Amount of guests: " + guests);
-        System.out.println("Income: " + revenue + "kr");
+    public void revenueStream (Scanner inputString) {
+        int run;
+        do {
+            printRevenue();
+            System.out.println(Menu.back);
+            run = Integer.parseInt(inputString.next());
+
+        } while (run != 0);
     }
 }

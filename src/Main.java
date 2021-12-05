@@ -43,6 +43,32 @@ public class Main {
                 plaza.addEmployee(em3);
                 plaza.addEmployee(em4);
 
+                Revenue month1 = new Revenue("January",0,0);
+                Revenue month2 = new Revenue("February",0,0);
+                Revenue month3 = new Revenue("March",0,0);
+                Revenue month4 = new Revenue("April",0,0);
+                Revenue month5 = new Revenue("May",0,0);
+                Revenue month6 = new Revenue("June",0,0);
+                Revenue month7 = new Revenue("July",0,0);
+                Revenue month8 = new Revenue("August",0,0);
+                Revenue month9 = new Revenue("September",0,0);
+                Revenue month10 = new Revenue("October",0,0);
+                Revenue month11 = new Revenue("November",0,0);
+                Revenue month12 = new Revenue("December",0,0);
+
+                plaza.addRevenue(month1);
+                plaza.addRevenue(month2);
+                plaza.addRevenue(month3);
+                plaza.addRevenue(month4);
+                plaza.addRevenue(month5);
+                plaza.addRevenue(month6);
+                plaza.addRevenue(month7);
+                plaza.addRevenue(month8);
+                plaza.addRevenue(month9);
+                plaza.addRevenue(month10);
+                plaza.addRevenue(month11);
+                plaza.addRevenue(month12);
+
                 Serialization.serialize(plaza, "Database.ser");
                 System.out.println("Serialization done");
             } else {
@@ -93,7 +119,7 @@ public class Main {
                     }
 
                     case 6 ->
-                        plaza.revenueStream();
+                        plaza.revenueStream(inputString);
 
                     default ->
                             // We should never get here because makeMainMenuChoice() makes sure that we only get valid options, but there have to be a default case
