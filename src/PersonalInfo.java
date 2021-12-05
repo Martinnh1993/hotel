@@ -34,8 +34,8 @@ public abstract class PersonalInfo implements Serializable {
 
     public boolean checkNr (String input){
         if (input.length()==8 && isNumeric(input)) {
-            Long temp;
-            temp = Long.valueOf(input);
+            long temp;
+            temp = Long.parseLong(input);
             phoneNr = temp;
             return false;
         }
@@ -46,8 +46,7 @@ public abstract class PersonalInfo implements Serializable {
 
     public static int convertString (String input) {
         try{
-            int number = Integer.parseInt(input);
-            return number;
+            return Integer.parseInt(input);
         }
         catch (NumberFormatException ex){
             System.out.println("Invalid input");

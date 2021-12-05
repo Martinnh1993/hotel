@@ -5,8 +5,6 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
-import static java.time.temporal.ChronoUnit.DAYS;
-
 public class Guest extends PersonalInfo implements Serializable {
     static final long serialVersionUID = 44L;
     private String address;
@@ -18,8 +16,8 @@ public class Guest extends PersonalInfo implements Serializable {
     public String getAddress() {return address;}
     public int getZipCode() {return zipCode;}
     public int getNumberOfGuests() {return numberOfGuests;}
-    public LocalDate getStartDate() {return startDate;}
     public LocalDate getEndDate() {return endDate;}
+    public LocalDate getStartDate() {return startDate;}
 
     public void setAddress(String address) {this.address = address;}
     public void setZipCode(int zipCode) {this.zipCode = zipCode;}
@@ -56,7 +54,7 @@ public class Guest extends PersonalInfo implements Serializable {
     public boolean checkZipCode (String input){
         if (input.length()==4 && isNumeric(input)) {
             int temp;
-            temp = Integer.valueOf(input);
+            temp = Integer.parseInt(input);
             zipCode = temp;
             return false;
         }

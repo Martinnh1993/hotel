@@ -1,9 +1,7 @@
 import java.util.Scanner;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
 
-    public class Main {
+public class Main {
 
         public static void main(String[] args) {
             Hotel plaza = new Hotel();
@@ -19,7 +17,7 @@ import java.util.Scanner;
                 Room double1 = new Room("Double bedroom", false, 1450, 1, 2, 4);
                 Room double2 = new Room("Double bedroom", false, 1500, 2, 2, 4);
                 Room suite1 = new Room("Suite", true, 2000, 1, 3, 6);
-                Room suite2 = new Room("Suite", true, 2400, -2, 3, 6);
+                Room suite2 = new Room("Suite", true, 2400, 2, 3, 6);
 
                 plaza.addAvailableRoom(single1);
                 plaza.addAvailableRoom(single2);
@@ -35,7 +33,7 @@ import java.util.Scanner;
                 plaza.addAllRooms(suite1);
                 plaza.addAllRooms(suite2);
 
-                Employee em1 = new Employee("nayeem", "hossain", 81913638L, "Director", 300);
+                Employee em1 = new Employee("Nayeem", "hossain", 81913638L, "Director", 300);
                 Employee em2 = new Employee("Emil", "Bocadillo", 5848654L, "Receptionist", 150);
                 Employee em3 = new Employee("Martin", "Niemann Hansen", 52404922L, "Accountant", 250);
                 Employee em4 = new Employee("Andrea", "Di Claudio", 45786123L, "Cleaning lady", 120);
@@ -75,27 +73,35 @@ import java.util.Scanner;
                     }
                     case 2 -> {
                         // Show booked rooms
-                        plaza.printBookedRooms();
+                        plaza.bookedRoomMenu(inputString, inputInt);
+                        Serialization.serialize(plaza,"Database.ser");
                     }
                     case 3 -> {
-                        // Show available rooms
-                        plaza.printAvailableRooms();
+                        // Check out
+                        plaza.checkOut(inputString);
+                        Serialization.serialize(plaza,"Database.ser");
                     }
                     case 4 -> {
-                        // Show working schedule
-                        System.out.println("Show working schedule");
+                        // Update room price
+                        plaza.changeRoomPrice(inputString);
+                        Serialization.serialize(plaza,"Database.ser");
                     }
                     case 5 -> {
-                        // Show economy: Budget, revenue, earnings, expenses etc.
-                        System.out.println("Show economy: Budget, revenue, earnings, expenses etc.");
+                        // Show employees and make changes to it
+                        plaza.employeeMenu(inputString);
+                        Serialization.serialize(plaza,"Database.ser");
                     }
-                    default -> {
+
+                    case 6 ->
+                        plaza.revenueStream();
+
+                    default ->
                             // We should never get here because makeMainMenuChoice() makes sure that we only get valid options, but there have to be a default case
                             System.out.println("Invalid input");
-                }
+
 
                 }
-            } while (quit==false);
+            } while (quit == false);
         }
 
     }

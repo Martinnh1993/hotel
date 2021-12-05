@@ -13,6 +13,10 @@ public class Room implements Serializable {
 
     public Room () {}
 
+    public void setPricePerNight(double pricePerNight) {
+        this.pricePerNight = pricePerNight;
+    }
+
     public Room(String roomKind, boolean wifiAccess, double pricePerNight, int floorNr, int roomNr, int capacity) {
         this.roomKind = roomKind;
         this.wifiAccess = wifiAccess;
@@ -32,10 +36,5 @@ public class Room implements Serializable {
     public int getCapacity() {return capacity;}
     public Guest getGuestInRoom() {return guestInRoom;}
     public boolean hasWifiAccess() {return wifiAccess;}
-
-    public void addWifi () {
-        hasWifiAccess();
-
-    }
 
 }
